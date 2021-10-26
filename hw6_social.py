@@ -290,7 +290,26 @@ Parameters: dict mapping strs to ints ; dict mapping strs to ints ; int ; str
 Returns: None
 '''
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
-    return
+    freqdict={}
+    for i in stateCounts:
+        if i in stateFeatureCounts:
+            frequency=stateFeatureCounts[i]/stateCounts[i]
+            freqdict[i]=frequency
+    d={}
+    while len(d)<n:
+        max=0
+        for i in freqdict:
+            if i not in d:
+                if freqdict[i]>max:
+                    max=freqdict[i]
+                    tag=i
+        d[tag]=max
+    x=d.keys()
+    y=d.values()
+    plt.bar(x,y)
+    plt.title(title)
+    plt.show()
+
 
 
 '''
