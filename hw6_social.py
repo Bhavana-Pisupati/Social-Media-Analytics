@@ -81,7 +81,23 @@ Parameters: str
 Returns: list of strs
 '''
 def findHashtags(message):
-    return
+    tags=[]
+    count=message.count("#")
+    for i in range(count):
+        start=message.find("#")
+        message=message[start:]
+        s=message[1:]
+        end=len(s)+1
+        for j in range(len(s)):
+            if s[j] in endChars:
+                end=j+1
+                break         
+        tag=message[:end]
+        message=message[1:]
+        tags.append(tag)
+    return tags
+
+    # return message
 
 
 '''
@@ -283,9 +299,11 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
     # test.testMakeDataFrame()
-    test.testParseName()
-    test.testParsePosition()
-    test.testParseState()
+    # test.testParseName()
+    # test.testParsePosition()
+    # test.testParseState()
+    test.testFindHashtags()
+
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
