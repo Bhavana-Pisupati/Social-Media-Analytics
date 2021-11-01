@@ -198,7 +198,14 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
+    d={}
+    for index,row in data.iterrows():
+        if row['region'] not in d:
+            d[row['region']]={}
+        if row[colName] not in d[row['region']]:
+            d[row['region']][row[colName]]=0
+        d[row['region']][row[colName]]+=1       
+    return d
 
 
 '''
@@ -350,11 +357,14 @@ if __name__ == "__main__":
     test.runWeek2()"""
     # test.testFindSentiment()
     # test.testAddSentimentColumn()
+
     df = makeDataFrame("data/politicaldata.csv")
     stateDf = makeDataFrame("data/statemappings.csv")
     addColumns(df, stateDf)
     addSentimentColumn(df)
-    test.testGetDataCountByState(df)
+
+    # test.testGetDataCountByState(df)
+    test.testGetDataForRegion(df)
     
 
 
